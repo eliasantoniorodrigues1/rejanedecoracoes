@@ -1,11 +1,14 @@
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = 'sua-chave-secreta-aqui'
+SECRET_KEY = os.environ['SECRET_KEY'] 
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*', ]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -72,7 +75,8 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Garante que os diretórios existam
-os.makedirs(os.path.join(STATICFILES_DIRS[0], 'images', 'fotos'), exist_ok=True)
+os.makedirs(os.path.join(
+    STATICFILES_DIRS[0], 'images', 'fotos'), exist_ok=True)
 os.makedirs(os.path.join(STATICFILES_DIRS[0], 'temp_zip'), exist_ok=True)
 
 # Configurações de mídia (se for usar uploads)
