@@ -1,0 +1,17 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+<h1>Galeria de Fotos</h1>
+<ul>
+  {% for pasta in pastas %}
+    <li>
+      <a href="{% url 'admin:editar_pasta' pasta %}" style="font-weight: bold; text-decoration: none;">
+        📁 {{ pasta }}
+      </a>
+      [<a href="{% url 'admin:renomear_pasta' pasta %}">Renomear</a>] |
+      [<a href="{% url 'admin:deletar_pasta' pasta %}">Deletar</a>]
+    </li>
+  {% empty %}
+    <li>Nenhuma pasta encontrada.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

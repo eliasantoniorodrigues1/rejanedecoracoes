@@ -1,0 +1,84 @@
+/* Estilos específicos do Elementor */
+.elementor-section {
+    position: relative;
+    width: 100%;
+}
+
+.elementor-container {
+    display: flex;
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+}
+
+.elementor-column {
+    position: relative;
+    min-height: 1px;
+    display: flex;
+}
+
+.elementor-widget-wrap {
+    position: relative;
+    width: 100%;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+/* Estilos para widgets */
+.elementor-widget-heading .elementor-heading-title {
+    margin: 0;
+    padding: 0;
+    line-height: 1.2;
+}
+
+.elementor-widget-image img {
+    max-width: 100%;
+    height: auto;
+    display: inline-block;
+}
+
+/* Animações */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 20px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.elementor-invisible {
+    visibility: hidden;
+}
+
+.elementor-animation-fadeInUp {
+    animation-name: fadeInUp;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+/* Estilos para o menu */
+.elementor-nav-menu--dropdown {
+    display: none;
+}
+
+.elementor-menu-toggle {
+    display: none;
+    cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+    .elementor-nav-menu--dropdown {
+        display: block;
+    }
+    
+    .elementor-menu-toggle {
+        display: block;
+    }
+    
+    .elementor-nav-menu--main {
+        display: none;
+    }
+}

@@ -1,0 +1,8 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+<h2>Deletar pasta: {{ pasta }}</h2>
+<form method="post">{% csrf_token %}
+  <p>Tem certeza que deseja apagar esta pasta?</p>
+  <button type="submit" style="color:red;">Sim, deletar</button>
+</form>
+{% endblock %}

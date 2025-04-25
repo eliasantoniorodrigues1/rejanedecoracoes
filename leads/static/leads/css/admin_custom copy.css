@@ -1,0 +1,58 @@
+/* Desativa modo escuro automático */
+:root {
+    color-scheme: light;
+}
+
+/* Muda a cor da barra superior do admin */
+#header {
+    background-color: #6EC1E4 !important;
+}
+
+#header h1 a {
+    color: white !important;
+}
+
+#user-tools a {
+    color: white !important;
+}
+
+/* custom.css */
+body.login, body.admin {
+    background: url('./leads/img/capa-site-rejane-1.jpeg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+#header {
+    background-color: rgba(0, 0, 0, 0.9);  /* Fundo semi-transparente para o cabeçalho */
+}
+
+.module, .dashboard #content {
+    background-color: rgba(255, 255, 255, 0.8);  /* Fundo semi-transparente para os módulos */
+}
+
+/* Adicione ao custom.css */
+.login #container, .dashboard #content {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+a:link, a:visited {
+    color: #0366d6;
+}
+
+a:hover {
+    color: #d9534f;
+}
+
+body.login::before, body.admin::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit;
+    filter: blur(5px);
+    z-index: -1;
+}

@@ -1,0 +1,9 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+<h2>Renomear pasta: {{ pasta }}</h2>
+<form method="post">{% csrf_token %}
+  <label>Novo nome:</label>
+  <input type="text" name="novo_nome" required>
+  <button type="submit">Renomear</button>
+</form>
+{% endblock %}

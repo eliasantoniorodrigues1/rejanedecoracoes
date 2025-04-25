@@ -1,0 +1,50 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+<h1>Bem-vindo ao Painel Administrativo - Rejane Decorações</h1>
+
+<a href="{% url 'admin:leads_zipdefotos_add' %}"
+   class="button"
+   style="
+       display: inline-block;
+       width: 200px;
+       text-align: center;
+       background:#4CAF50;
+       color:white;
+       padding:20px 20px;
+       border-radius:5px;
+       text-decoration:none;">
+    📦 Enviar fotos (.zip)
+</a>
+
+<a href="{% url 'admin:galeria' %}"
+   class="button"
+   style="
+       display: inline-block;
+       width: 200px;
+       text-align: center;
+       background:#C67A7D;
+       color:white;
+       padding:20px 20px;
+       border-radius:5px;
+       text-decoration:none;">
+    📁 Acessar Galeria de Fotos
+</a>
+
+    <a href="/"
+       class="button"
+       style="
+           display: inline-block;
+           width: 200px;
+           text-align: center;
+           background:#2196F3;
+           color:white;
+           padding:20px 20px;
+           border-radius:5px;
+           text-decoration:none;">
+        🏠 Voltar para Site
+    </a>
+</div>
+
+
+{{ block.super }}
+{% endblock %}
