@@ -61,7 +61,7 @@ def home(request):
     if not os.path.exists(FOTOS_DIR):
         os.makedirs(FOTOS_DIR)
 
-    for nome_tema in os.listdir(FOTOS_DIR):
+    for nome_tema in sorted(os.listdir(FOTOS_DIR)):
         caminho_tema = os.path.join(FOTOS_DIR, nome_tema)
         if not os.path.isdir(caminho_tema):
             continue
@@ -94,15 +94,17 @@ def home(request):
 def exibir_tema(request, nome_tema_slug):
     print(f"[INFO] Acessando tema: {nome_tema_slug}")
     nome_tema = nome_tema_slug.replace('-', ' ').title()
-    caminho_tema = os.path.join(FOTOS_DIR, nome_tema)
-    print(f"[INFO] Acessando tema: {nome_tema}---{caminho_tema}")
+    print(f"[INFO] Caminho padrao das imagens: {FOTOS_DIR}")
+    caminho_tema = os.path.join(FOTOS_DIR, nome_tema.upper())
+    print(f"[INFO] Caminho do tema: {caminho_tema}")
     imagens_tema = []
     if os.path.exists(caminho_tema) and os.path.isdir(caminho_tema):
+        print(f"[INFO] Tema encontrado: {caminho_tema}")
         for nome_arquivo in os.listdir(caminho_tema):
             # if nome_arquivo.endswith('_700x600.jpg'):
             #    continue  # Pula para a próxima iteração
-
             caminho_arquivo = os.path.join(caminho_tema, nome_arquivo)
+            print(f"[INFO] Verificando arquivo: {caminho_arquivo}")
             if os.path.isfile(caminho_arquivo):
                 caminho_relativo = os.path.join('static', 'images', 'fotos',
                                                 nome_tema.upper(),
@@ -112,7 +114,8 @@ def exibir_tema(request, nome_tema_slug):
                 imagens_tema.append({'thumbnail': caminho_relativo,
                                      'original': caminho_relativo,
                                      'nome': nome_arquivo})
-
+                
+    print(f"[INFO] Imagens do tema {nome_tema}: {imagens_tema}")
     context = {'nome_tema': nome_tema, 'imagens': imagens_tema}
     return render(request, 'pagina_tema.html', context)
 
