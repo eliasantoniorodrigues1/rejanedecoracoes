@@ -59,26 +59,127 @@
     animation-fill-mode: both;
 }
 
-/* Estilos para o menu */
-.elementor-nav-menu--dropdown {
-    display: none;
+/* Container principal do cabeçalho */
+.header-container {
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, #6e45e2 0%, #88d3ce 100%);
+    padding: 15px 5%;
+    color: white;
 }
 
-.elementor-menu-toggle {
-    display: none;
-    cursor: pointer;
+/* Primeira linha (contato/redes sociais) */
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 14px;
 }
 
-@media (max-width: 1024px) {
-    .elementor-nav-menu--dropdown {
-        display: block;
+/* Segunda linha (logo/CTAs) */
+.header-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* Logo */
+.site-branding {
+    flex: 1;
+    min-width: 200px;
+}
+
+.site-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+.site-description {
+    font-size: 16px;
+    margin: 5px 0 0;
+    font-weight: 300;
+}
+
+/* Barra de pesquisa */
+.search-box {
+    flex: 1;
+    max-width: 300px;
+    min-width: 150px;
+    margin: 0 20px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: none;
+}
+
+/* Botão de orçamento */
+.cta-button {
+    background: #ff6b6b;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.cta-button:hover {
+    background: #ff5252;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Links de contato/redes */
+.header-contact {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: white;
+    text-decoration: none;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .header-top {
+        flex-direction: column;
+        gap: 10px;
     }
     
-    .elementor-menu-toggle {
-        display: block;
+    .header-main {
+        flex-direction: column;
+        gap: 15px;
     }
     
-    .elementor-nav-menu--main {
-        display: none;
+    .site-branding, 
+    .search-box {
+        width: 100%;
+        max-width: 100%;
+        text-align: center;
+    }
+    
+    .cta-button {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .header-contact {
+        justify-content: center;
+        flex-wrap: wrap;
     }
 }
