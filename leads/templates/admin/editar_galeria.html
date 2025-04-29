@@ -1,129 +1,156 @@
 {% extends "admin/base_site.html" %}
 {% block content %}
-<h2>Editando pasta: {{ pasta }}</h2>
-<script>
-// Força recarregamento das imagens evitando cache
-document.addEventListener('DOMContentLoaded', function() {
-    const images = document.querySelectorAll('.img-container img');
-    const timestamp = new URLSearchParams(window.location.search).get('t');
+<div class="container">
+    <h2>Editando pasta: {{ pasta }}</h2>
     
-    if(timestamp) {
-        images.forEach(img => {
-            // Adiciona timestamp ao src da imagem
-            const separator = img.src.includes('?') ? '&' : '?';
-            img.src = img.src + separator + 't=' + timestamp;
-        });
+    <script>
+    // Força recarregamento das imagens evitando cache
+    document.addEventListener('DOMContentLoaded', function() {
+        const images = document.querySelectorAll('.img-container img');
+        const timestamp = new URLSearchParams(window.location.search).get('t');
         
-        // Limpa o parâmetro da URL
-        history.replaceState({}, '', window.location.pathname);
+        if(timestamp) {
+            images.forEach(img => {
+                // Adiciona timestamp ao src da imagem
+                const separator = img.src.includes('?') ? '&' : '?';
+                img.src = img.src + separator + 't=' + timestamp;
+            });
+            
+            // Limpa o parâmetro da URL
+            history.replaceState({}, '', window.location.pathname);
+        }
+    });
+    </script>
+
+    <style>
+    .galeria-container {
+        width: 95%;
+        display: flex;
+        justify-content: center;
     }
-});
-</script>
+    
+    .galeria-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 20px;
+        width: 100%;
+        max-width: 1200px;
+        padding: 20px 0;
+    }
 
-<style>
-.galeria-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
+    .img-container {
+        width: 100%;
+        padding: 10px;
+        background: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        text-align: center;
+    }
+    .img-container img {
+        max-width: 100%;
+        max-height: 180px;
+        display: block;
+        margin: 0 auto 10px;
+    }
+    .img-container form {
+        margin: 5px 0;
+    }
 
-.img-container {
-    width: 220px;
-    padding: 10px;
-    background: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    text-align: center;
-}
-.img-container img {
-    max-width: 100%;
-    max-height: 180px;
-    display: block;
-    margin: 0 auto 10px;
-}
-.img-container form {
-    margin: 5px 0;
-}
+    /* Estilo padrão para todos os botões */
+    button {
+        width: 100%;
+        padding: 8px 0;
+        margin: 4px 0;
+        border: none;
+        border-radius: 5px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
 
-/* Estilo padrão para todos os botões */
-button {
-    width: 100%;
-    padding: 8px 0;
-    margin: 4px 0;
-    border: none;
-    border-radius: 5px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
+    /* Botão de salvar legenda */
+    button[type="submit"] {
+        background-color: #4CAF50; /* Verde */
+        color: white;
+    }
 
-/* Botão de salvar legenda */
-button[type="submit"] {
-    background-color: #4CAF50; /* Verde */
-    color: white;
-}
+    /* Botão de girar - Azul mais escuro */
+    form:nth-of-type(2) button[type="submit"] {
+        background-color: #3c75cc; /* Azul escuro */
+        color: white;
+    }
 
-/* Botão de girar - Azul mais escuro */
-form:nth-of-type(2) button[type="submit"] {
-    background-color: #3c75cc; /* Azul escuro */
-    color: white;
-}
+    /* Botão de deletar */
+    button.delete {
+        background-color: #f44336 !important; /* Vermelho */
+        color: white;
+    }
 
-/* Botão de deletar */
-button.delete {
-    background-color: #f44336 !important; /* Vermelho */
-    color: white;
-}
+    /* Efeito hover para todos os botões */
+    button:hover {
+        opacity: 0.9;
+    }
 
-/* Efeito hover para todos os botões */
-button:hover {
-    opacity: 0.9;
-}
+    /* Campo de texto da legenda */
+    input[type="text"] {
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 5px;
+        box-sizing: border-box;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
 
-/* Campo de texto da legenda */
-input[type="text"] {
-    width: 100%;
-    padding: 5px;
-    margin-bottom: 5px;
-    box-sizing: border-box;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-</style>
+    /* Responsividade */
+    @media (max-width: 768px) {
+        .galeria-grid {
+            grid-template-columns: 1fr;
+            max-width: 400px;
+        }
+    }
+    </style>
 
-<div class="galeria-grid">
-{% for imagem in imagens %}
-  <div class="img-container">
-    <!--
-    <img src="{{ imagem.caminho }}" alt="{{ imagem.nome }}">
-    -->
-    <img src="{{ imagem.caminho }}?v={% now 'U' %}" alt="{{ imagem.nome }}">
-    <form method="post">{% csrf_token %}
-        <input type="hidden" name="acao" value="salvar_legenda">
-        <input type="hidden" name="imagem" value="{{ imagem.nome }}">
-        <input type="text" name="legenda" value="{{ imagem.legenda }}" placeholder="Legenda...">
-        <button type="submit">💾 Salvar Legenda</button>
-    </form>
+    <div class="galeria-container">
+        <div class="galeria-grid">
+        {% for imagem in imagens %}
+          <div class="img-container">
+            <img src="{{ imagem.caminho }}?v={% now 'U' %}" alt="{{ imagem.nome }}">
+            <form method="post">{% csrf_token %}
+                <input type="hidden" name="acao" value="salvar_legenda">
+                <input type="hidden" name="imagem" value="{{ imagem.nome }}">
+                <input type="text" name="legenda" value="{{ imagem.legenda }}" placeholder="Legenda...">
+                <button type="submit">💾 Salvar Legenda</button>
+            </form>
 
-    <form method="post">{% csrf_token %}
-        <input type="hidden" name="acao" value="rotacionar">
-        <input type="hidden" name="imagem" value="{{ imagem.nome }}">
-        <input type="hidden" name="angulo" value="90">
-        <button type="submit">↪️ Girar 90°</button>
-    </form>
+            <form method="post">{% csrf_token %}
+                <input type="hidden" name="acao" value="rotacionar">
+                <input type="hidden" name="imagem" value="{{ imagem.nome }}">
+                <input type="hidden" name="angulo" value="90">
+                <button type="submit">↪️ Girar 90°</button>
+            </form>
 
-    <form method="post" onsubmit="return confirm('Deseja realmente deletar esta imagem?');">
-        {% csrf_token %}
-        <input type="hidden" name="acao" value="deletar">
-        <input type="hidden" name="imagem" value="{{ imagem.nome }}">
-        <button class="delete" type="submit">🗑️ Deletar Imagem</button>
-    </form>
+            <form method="post" style="margin-right: 10px;">{% csrf_token %}
+                <input type="hidden" name="acao" value="definir_capa">
+                <input type="hidden" name="imagem" value="{{ imagem.nome }}">
+                <button type="submit" class="btn btn-warning btn-sm">⭐ Definir como Capa</button>
+            </form>
 
-  </div>
-{% empty %}
-  <p>Nenhuma imagem encontrada.</p>
-{% endfor %}
+
+            <form method="post" onsubmit="return confirm('Deseja realmente deletar esta imagem?');">
+                {% csrf_token %}
+                <input type="hidden" name="acao" value="deletar">
+                <input type="hidden" name="imagem" value="{{ imagem.nome }}">
+                <button class="delete" type="submit">🗑️ Deletar Imagem</button>
+            </form>
+          </div>
+        {% empty %}
+          <p>Nenhuma imagem encontrada.</p>
+        {% endfor %}
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="/admin/galeria/">⬅ Voltar à galeria</a>
+    </div>
 </div>
-
-<a href="/admin/galeria/">⬅ Voltar à galeria</a>
 {% endblock %}

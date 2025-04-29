@@ -1,16 +1,36 @@
 {% load static %}
 <!-- Jumbotron -->
-<section class="jumbotron jumbotron-fluid text-white text-center" style="position: relative; background-image: url('static/images/logo/capa-site-rejane-1.jpeg' ); background-size: cover; background-position: center; height: 400px;">
+<section class="jumbotron jumbotron-fluid text-white d-flex align-items-center" 
+         style="position: relative; 
+                background-image: url('{% static 'images/logo/capa-site-rejane-1.jpeg' %}');
+                background-size: cover; 
+                background-position: center; 
+                height: 600px;  <!-- Altura aumentada -->
+                margin: 0;
+                padding: 0;
+                width: 100vw;
+                left: 50%;
+                right: 50%;
+                margin-left: -50vw;
+                margin-right: -50vw;">
 
   <!-- Camada semi-transparente -->
-  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.39);"></div>
+  <div style="position: absolute; 
+              top: 0; 
+              left: 0; 
+              width: 100%; 
+              height: 100%; 
+              background: rgba(0, 0, 0, 0.39);"></div>
 
-  <!-- Conteúdo -->
-  <div class="container position-relative" style="z-index: 2;">
-    <h1 class="title-1">Decoração de Festa em BH</h1>
-    <p class="title-2">Transforme a festa do seu filho em realidade com uma decoração encantadora!</p>
-    <p class="p-title">Cuidamos de toda a decoração para que você aproveite cada momento da festa sem preocupações.</p>
-    <a href="https://wa.me/5531991409374" class="btn btn-success btn-lg mt-2">Solicitar Orçamento</a>
+  <!-- Conteúdo centralizado -->
+  <div class="container text-center position-relative" style="z-index: 2;">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <h1 class="display-4 mb-4">Decoração de Festa em BH</h1>
+        <p class="lead mb-4">Transforme a festa do seu filho em realidade com uma decoração encantadora!</p>
+        <p class="mb-5">Cuidamos de toda a decoração para que você aproveite cada momento da festa sem preocupações.</p>
+        <a class="btn btn-success btn-lg px-5 py-3" href="https://wa.me/5531991409374" >Solicitar Orçamento</a>
+      </div>
+    </div>
   </div>
-
 </section>

@@ -1,15 +1,15 @@
 {% load static %}
 {% block content %}
-<div class="container my-5">
-    <h2 class="text-center mb-4">O que nossos clientes dizem</h2>
+<div class="container my-5 p-4 rounded bg-light rounded" style="background-color: #daf3f2;">  <!-- Aqui adicionei 'bg-light', 'p-4' e 'rounded' -->
+    <h2 class="text-center mb-4" >O que nossos clientes dizem</h2>
     {% if avaliacoes %}
     <div id="carouselAvaliacoes" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
 
             {% for review in avaliacoes %}
-              <div class="carousel-item {% if forloop.first %}active{% endif %}">
+              <div class="carousel-item {% if forloop.first %}active{% endif %}" style="background-color: #daf3f2;">
                 <div class="card shadow-sm p-4">
-                    <div class="card-body text-center">
+                    <div class="card-body text-center" style="background-color: #fff;">
                         <h5 class="card-title">{{ review.nome }}</h5>
                         <p class="text-warning mb-2">
                             {% for i in "12345"|slice:":review.rating"|make_list %}
@@ -17,10 +17,10 @@
                             {% endfor %}
                         </p>
                         <p class="card-text">{{ review.text|truncatewords:30 }}</p>
-                        <small class="text-muted">{{ review.comentario }}</small>
+                        <p class="text-muted">{{ review.comentario }}</p>
                     </div>
                 </div>
-            </div>
+              </div>
             {% endfor %}
 
         </div>
@@ -44,8 +44,9 @@
 <script>
     var myCarousel = document.querySelector('#carouselAvaliacoes');
     var carousel = new bootstrap.Carousel(myCarousel, {
-        interval: 4000,  // muda de avaliação a cada 4 segundos
+        interval: 4000,
         ride: 'carousel'
     });
 </script>
 {% endblock %}
+

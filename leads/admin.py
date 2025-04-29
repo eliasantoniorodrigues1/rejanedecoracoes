@@ -75,7 +75,7 @@ class CustomAdminSite(admin.AdminSite):
 
         # Caminho para o arquivo de legendas
         legenda_path = os.path.join(pasta_path, "legendas.json")
-        
+
         # Inicializa a estrutura de dados
         galeria_data = {
             'imagens': [],
@@ -92,23 +92,23 @@ class CustomAdminSite(admin.AdminSite):
                 galeria_data = {'imagens': [], 'capa': None}
 
         # Lista as imagens da pasta
-        imagens_na_pasta = [f for f in os.listdir(pasta_path) 
+        imagens_na_pasta = [f for f in os.listdir(pasta_path)
                             if f.lower().endswith(('.jpg', '.jpeg', '.png'))]
 
         # Atualiza a lista de imagens no JSON
         imagens_json = []
-        
+
         # Primeiro, verifica imagens existentes no JSON
         for img_data in galeria_data.get('imagens', []):
             if img_data['nome'] in imagens_na_pasta:
                 imagens_json.append(img_data)
-        
+
         # Depois, adiciona novas imagens que não estão no JSON
         for nome_arquivo in imagens_na_pasta:
             if not any(img['nome'] == nome_arquivo for img in imagens_json):
                 nome_base = os.path.splitext(nome_arquivo)[0]
                 legenda = nome_base.replace('_', ' ').title()
-                
+
                 imagens_json.append({
                     'nome': nome_arquivo,
                     'caminho': f"/static/images/fotos/{folder}/{nome_arquivo}",
@@ -117,10 +117,10 @@ class CustomAdminSite(admin.AdminSite):
 
         # Atualiza a estrutura de dados
         galeria_data['imagens'] = imagens_json
-        
+
         # Se não houver capa definida, usa a primeira imagem
         if not galeria_data.get('capa') and imagens_json:
-            galeria_data['capa'] = imagens_json[0]['nome']
+            galeria_data['capa'] = f"/static/images/fotos/{folder}/{imagens_json[0]['nome']}"
 
         # Salva o arquivo JSON atualizado
         with open(legenda_path, 'w', encoding='utf-8') as f:
@@ -148,10 +148,10 @@ class CustomAdminSite(admin.AdminSite):
                     if img_data['nome'] == imagem:
                         img_data['legenda'] = legenda
                         break
-                
+
                 with open(legenda_path, 'w', encoding='utf-8') as f:
                     json.dump(galeria_data, f, ensure_ascii=False, indent=2)
-                
+
                 messages.success(request, f"Legenda atualizada para {imagem}.")
 
             elif acao == "rotacionar":
@@ -164,14 +164,14 @@ class CustomAdminSite(admin.AdminSite):
                             img = img.convert("RGB")
 
                         rotated = img.rotate(-angulo, expand=True,
-                                            resample=Image.BICUBIC)
+                                             resample=Image.BICUBIC)
 
                         # Adiciona timestamp ao nome do arquivo temporário
                         timestamp = int(time.time())
                         temp_path = os.path.join(
                             pasta_path, f"temp_rot_{timestamp}_{imagem}")
                         rotated.save(temp_path, format='JPEG',
-                                    quality=95, subsampling=0, optimize=True)
+                                     quality=95, subsampling=0, optimize=True)
 
                     os.replace(temp_path, caminho)
                     messages.success(
@@ -189,16 +189,21 @@ class CustomAdminSite(admin.AdminSite):
 
             elif acao == "definir_capa":
                 if any(img['nome'] == imagem for img in galeria_data['imagens']):
-                    galeria_data['capa'] = imagem
+                    # imagem
+                    galeria_data['capa'] = f"/static/images/fotos/{folder}/{imagem}"
                     with open(legenda_path, 'w', encoding='utf-8') as f:
-                        json.dump(galeria_data, f, ensure_ascii=False, indent=2)
-                    messages.success(request, f"Imagem '{imagem}' definida como capa.")
+                        json.dump(galeria_data, f,
+                                  ensure_ascii=False, indent=2)
+                    messages.success(
+                        request, f"Imagem '{imagem}' definida como capa.")
                 else:
-                    messages.error(request, f"Imagem '{imagem}' não encontrada na galeria.")
+                    messages.error(
+                        request, f"Imagem '{imagem}' não encontrada na galeria.")
 
             elif acao == "deletar":
                 if not imagem:
-                    messages.error(request, "Imagem não especificada para deleção.")
+                    messages.error(
+                        request, "Imagem não especificada para deleção.")
                     return redirect(f"/admin/galeria/{folder}/editar/")
 
                 caminho = os.path.join(pasta_path, imagem)
@@ -206,19 +211,23 @@ class CustomAdminSite(admin.AdminSite):
                 try:
                     os.remove(caminho)
                     # Remove a imagem da lista no JSON
-                    galeria_data['imagens'] = [img for img in galeria_data['imagens'] 
-                                            if img['nome'] != imagem]
-                    
+                    galeria_data['imagens'] = [img for img in galeria_data['imagens']
+                                               if img['nome'] != imagem]
+
                     # Se a imagem deletada era a capa, define uma nova capa
                     if galeria_data.get('capa') == imagem and galeria_data['imagens']:
-                        galeria_data['capa'] = galeria_data['imagens'][0]['nome']
-                    
+                        # galeria_data['imagens'][0]['nome']
+                        galeria_data['capa'] = f"/static/images/fotos/{folder}/{galeria_data['imagens'][0]['nome']}"
+
                     with open(legenda_path, 'w', encoding='utf-8') as f:
-                        json.dump(galeria_data, f, ensure_ascii=False, indent=2)
-                    
-                    messages.success(request, f"Imagem '{imagem}' deletada com sucesso.")
+                        json.dump(galeria_data, f,
+                                  ensure_ascii=False, indent=2)
+
+                    messages.success(
+                        request, f"Imagem '{imagem}' deletada com sucesso.")
                 except Exception as e:
-                    messages.error(request, f"Erro ao deletar imagem '{imagem}': {e}")
+                    messages.error(
+                        request, f"Erro ao deletar imagem '{imagem}': {e}")
 
             return redirect(f"/admin/galeria/{folder}/editar/")
 

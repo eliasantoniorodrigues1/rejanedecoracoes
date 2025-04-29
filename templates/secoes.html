@@ -1,14 +1,15 @@
 {% include 'head.html' %}
 {% load static %}
-<div class="d-flex justify-content-center"> 
-        <!-- Sobre Nós -->
-        <section id="sobre" class="bg-light py-5 text-center">
-        <img src="/static/images/logo/logo_rejane_site_transparente-removebg-preview-400x400.png" alt="Logo" width="150" class="mb-3">
+
+<div class="d-flex justify-content-center">
+    <!-- Sobre Nós -->
+    <section id="sobre" class="bg-light py-5 text-center slide-in-section">
+        <img src="/static/images/logo/logo_rejane_site_transparente-removebg-preview-400x400.png" alt="Logo" width="300" class="mb-3">
         <h2>Sobre Nós</h2>
         <p class="lead">Transformar sonhos em realidade é um ato de magia!</p>
         <p class="px-5">Nós cuidamos de cada detalhe da decoração da sua festa, para que você possa se entregar aos momentos mais especiais com quem você ama. Deixe a gente criar um mundo encantado, enquanto você curte cada sorriso e abraço.</p>
         <a href="https://wa.me/5531991409374" class="btn btn-success mt-3">Solicitar Orçamento</a>
-        </section>
+    </section>
 </div>
 
 <div class="d-flex justify-content-center"> 
@@ -16,17 +17,20 @@
 {% include 'avaliacoes_google.html' %}
 </div>
 
-<div class="d-flex justify-content-center"> 
-    <!-- Localização -->
-    <section class="container my-5 text-center">
-    <h2>Localização</h2>
-    <div class="ratio ratio-16x9 my-4">
-        <iframe src="https://www.google.com/maps?q=R.+Cananéia,+135+-+Caiçaras,+Belo+Horizonte+-+MG,+30770-120&output=embed" allowfullscreen loading="lazy"></iframe>
-    </div>
-    </section>
-</div>
+<!-- Localização -->
+<section class="w-100 my-5 text-center">
+  <h2>Localização</h2>
+  <div class="ratio ratio-16x9 my-4">
+    <iframe src="https://www.google.com/maps?q=R.+Cananéia,+135+-+Caiçaras,+Belo+Horizonte+-+MG,+30770-120&output=embed" 
+            allowfullscreen 
+            loading="lazy" 
+            style="border:0; width:100%; height:60%;">
+    </iframe>
+  </div>
+</section>
 
-<div class="d-flex justify-content-center"> 
+
+<div class="d-flex justify-content-center" id="secao-contato"> 
     <!-- Contato -->
     <section id="contato" class="bg-light py-5 text-center">
     <h2>Entre em contato</h2>
@@ -35,3 +39,32 @@
     </section>
 
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const sobreSection = document.querySelector('#sobre');
+    
+    function checkSlide() {
+        // Quando o topo da seção está a 3/4 da altura da janela
+        const slideInAt = (window.scrollY + window.innerHeight) - sobreSection.offsetHeight / 4;
+        // Fundo da seção
+        const sectionBottom = sobreSection.offsetTop + sobreSection.offsetHeight;
+        
+        const isHalfShown = slideInAt > sobreSection.offsetTop;
+        const isNotScrolledPast = window.scrollY < sectionBottom;
+        
+        if (isHalfShown && isNotScrolledPast) {
+            sobreSection.classList.add('active');
+        } else {
+            // Opcional: Remova esta linha se quiser que a animação ocorra apenas uma vez
+            sobreSection.classList.remove('active');
+        }
+    }
+    
+    // Verifica a posição ao carregar a página
+    checkSlide();
+    
+    // Verifica a posição durante o scroll
+    window.addEventListener('scroll', checkSlide);
+});
+</script>

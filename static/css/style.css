@@ -1,34 +1,199 @@
-/* Estilos globais */
-:root {
-    --wp--preset--color--black: #000000;
-    --wp--preset--color--white: #ffffff;
-    --wp--preset--color--vivid-red: #cf2e2e;
-    --wp--preset--color--vivid-cyan-blue: #0693e3;
-}
-
-body {
+/* ===== RESET & BASE ===== */
+html, body {
+    background-color: #daf3f2;
     margin: 0;
     padding: 0;
-    font-family: 'Roboto', sans-serif;
+    min-height: 100vh;
+    font-family: 'Arima', cursive, sans-serif;
+    font-weight: 400;
+    scroll-behavior: smooth;
 }
 
 a {
-    text-decoration: underline;
+    text-decoration: none;
 }
 
-/* Estilos para o cabeçalho */
+/* ===== REDES SOCIAIS ===== 
+div#redes-sociais {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+}
+*/
+/* ===== HEADER & NAV ===== */
 .header {
     background: linear-gradient(135deg, rgba(6, 147, 227, 1) 0%, rgb(155, 81, 224) 100%);
     padding: 15px 0;
 }
 
-/* Estilos para seções */
+nav.navbar {
+    background-color: #daf3f2;
+    border: 3px solid rgba(0,0,0,0.1);
+    box-shadow: 0 4px 4px rgba(0,0,0,0.1), 0 4px 8px rgba(0,0,0,0.1);
+    max-height: 150px;
+}
+
+/* Garante que o container navbar não force tamanhos indesejados */
+.navbar > .container {
+  max-width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+
+a.nav-link {
+    color: #464545;
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+}
+
+    /* Estilo para a logo */
+    .logo-responsive {
+    /* Tamanho para mobile */
+    max-width: 200px;
+    height: auto; /* Mantém a proporção */
+    
+    /* Centraliza a imagem */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    
+    /* Garante que não ultrapasse o container pai */
+    width: 100%;
+    object-fit: contain;
+    }
+
+/* ===== BOTÕES ===== */
+.custom-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 330px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    margin: 8px 0;
+}
+
+.custom-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+.custom-btn svg {
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+.btn-instagram {
+    background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+    color: white;
+    border: 1px solid #C13584;
+}
+
+.btn-whatsapp {
+    background: #25D366;
+    color: white;
+    border: 1px solid #128C7E;
+}
+
+/* ===== JUMBOTRON ===== */
+.jumbotron-custom {
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.jumbotron-custom h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+.jumbotron-custom .lead {
+    font-size: 1.5rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.jumbotron-custom .btn {
+    font-size: 1.2rem;
+    border-radius: 50px;
+    transition: all 0.3s;
+}
+
+.jumbotron-custom .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* ===== CARDS ===== */
+h2.text-center {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #464545;
+    margin-bottom: 20px;
+    font
+}
+
+/* ===== SEÇÕES ===== */
+.slide-in-section {
+    will-change: transform, opacity;
+}
+
 .section {
     padding: 60px 0;
 }
 
+/* Adicione isso no seu arquivo CSS */
+.slide-in-section {
+    opacity: 0;
+    transform: translateX(100%);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
 
+.slide-in-section.active {
+    opacity: 1;
+    transform: translateX(0);
+}
 
+div.card-body {
+    background-color: #118EC3;
+    color: #fff;
+    font-family: 'Arima', sans-serif;
+}
+
+div.carousel-carousel-inner {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+section.bg-light {
+    background-color: #daf3f2 !important;
+}
+
+/* ===== CARDS ===== */
+h5.card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333;
+}
+
+p.text-muted {
+    font-size: 1.5rem;
+    color: #555;
+}
+
+/* ===== FOOTER ===== */
 footer.rodape {
     background: linear-gradient(135deg, rgba(6, 147, 227, 1) 0%, rgb(155, 81, 224) 100%);
     padding: 20px;
@@ -37,45 +202,112 @@ footer.rodape {
     align-items: center;
 }
 
-/* Responsividade */
-/* Ajustes para tablets */
+/* ===== BOTÃO ESPECÍFICO ===== */
+a.btn.btn-success {
+    background: linear-gradient(144deg, #148a01, #19b002 100%, #AF40FF);
+    --cor-de-fundo: linear-gradient(144deg, #148a01, #19b002 100%, #AF40FF);
+    --cor-da-sombra: 32, 209, 4;
+}
+
+a.btn.btn-success:hover {
+    background: linear-gradient(144deg, #148a01, #19b002 100%, #AF40FF);
+    box-shadow: 0 4px 8px rgba(var(--cor-da-sombra), 0.2);
+}
+
+/* ===== ANIMAÇÕES ===== */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.icon-animate {
+    animation: pulse 2s infinite;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+/* Tablets */
 @media (min-width: 768px) and (max-width: 1024px) {
     .header {
         padding: 10px 0;
     }
-    
+
+  .logo-responsive {
+    max-width: 300px;
+  }
+
     .section {
         padding: 40px 0;
     }
-    .elementor-element[data-id="626ee24"] .e-con-inner {
-        grid-template-columns: repeat(3, 1fr);
+
+    #redes-sociais {
+        flex-direction: row;
+        align-items: center;
     }
-    .e-con-inner {
-        grid-template-columns: repeat(3, 1fr); /* 3 colunas em tablet */
+  
+    .custom-btn {
+        margin: 0 8px;
+    }
+
+    .jumbotron-custom {
+        min-height: 500px;
+    }
+    
+    .jumbotron-custom h1 {
+        font-size: 2.2rem;
+    }
+    
+    .jumbotron-custom .lead {
+        font-size: 1.2rem;
     }
 }
 
-
+/* Mobile */
 @media (max-width: 767px) {
     .header {
         flex-direction: column;
     }
     
+    nav.navbar {
+        background-color: #daf3f2;
+        border: 3px solid rgba(0,0,0,0.1);
+        box-shadow: 0 4px 4px rgba(0,0,0,0.1), 0 4px 8px rgba(0,0,0,0.1);
+
+    }
+
+    /* Estilo adicional para o container pai se necessário */
+    .navbar-brand {
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    .logo-responsive {
+        max-width: 150px; /* Um pouco menor para telas muito pequenas */
+    }
+
     .section {
         padding: 30px 0;
     }
-    .elementor-element[data-id="626ee24"] .e-con-inner {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-    }
     
-    .elementor-element[data-id="4042bcf"] p {
-        font-size: 14px;
-        padding: 8px 4px;
+    .jumbotron-custom h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
     }
-    
-    .elementor-element[data-id="f6c5b0e"] img {
-        height: 150px; /* Altura fixa para mobile */
+
+    .jumbotron-custom .lead {
+        font-size: 1.5rem;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+
+    .jumbotron-custom .btn {
+        font-size: 1.2rem;
+        border-radius: 50px;
+        transition: all 0.3s;
+    }
+
+    .jumbotron-custom .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     }
 }
-

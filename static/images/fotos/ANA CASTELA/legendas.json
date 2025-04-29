@@ -1,0 +1,55 @@
+{
+  "imagens": [
+    {
+      "nome": "20240622_133759_700x600.jpg",
+      "caminho": "/static/images/fotos/ANA CASTELA/20240622_133759_700x600.jpg",
+      "legenda": "20240622 133759 700X600"
+    },
+    {
+      "nome": "20240622_133812_700x600.jpg",
+      "caminho": "/static/images/fotos/ANA CASTELA/20240622_133812_700x600.jpg",
+      "legenda": "20240622 133812 700X600"
+    },
+    {
+      "nome": "20240622_133901_700x600.jpg",
+      "caminho": "/static/images/fotos/ANA CASTELA/20240622_133901_700x600.jpg",
+      "legenda": "20240622 133901 700X600"
+    },
+    {
+      "nome": "20240622_133921_700x600.jpg",
+      "caminho": "/static/images/fotos/ANA CASTELA/20240622_133921_700x600.jpg",
+      "legenda": "20240622 133921 700X600"
+    },
+    {
+      "nome": "20240622_133927_700x600.jpg",
+      "caminho": "/static/images/fotos/ANA CASTELA/20240622_133927_700x600.jpg",
+      "legenda": "20240622 133927 700X600"
+    },
+    {
+      "nome": "20240622_133933_700x600.jpg",
+      "caminho": "/static/images/fotos/ANA CASTELA/20240622_133933_700x600.jpg",
+      "legenda": "20240622 133933 700X600"
+    },
+    {
+      "nome": "20240622_133948_700x600.jpg",
+      "caminho": "/static/images/fotos/ANA CASTELA/20240622_133948_700x600.jpg",
+      "legenda": "20240622 133948 700X600"
+    },
+    {
+      "nome": "20240622_134247_700x600.jpg",
+      "caminho": "/static/images/fotos/ANA CASTELA/20240622_134247_700x600.jpg",
+      "legenda": "20240622 134247 700X600"
+    },
+    {
+      "nome": "20240622_141817_700x600.jpg",
+      "caminho": "/static/images/fotos/ANA CASTELA/20240622_141817_700x600.jpg",
+      "legenda": "20240622 141817 700X600"
+    },
+    {
+      "nome": "20240622_155843_700x600.jpg",
+      "caminho": "/static/images/fotos/ANA CASTELA/20240622_155843_700x600.jpg",
+      "legenda": "20240622 155843 700X600"
+    }
+  ],
+  "capa": "/static/images/fotos/ANA CASTELA/20240622_133759_700x600.jpg"
+}

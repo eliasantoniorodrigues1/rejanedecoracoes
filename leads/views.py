@@ -69,34 +69,44 @@ def home(request):
         if not os.path.isdir(caminho_tema):
             continue
 
-        imagem_redimensionada = None
+        imagem_capa = None
 
-        for nome_arquivo in os.listdir(caminho_tema):
-            caminho_arquivo = os.path.join(caminho_tema, nome_arquivo)
-            if not os.path.isfile(caminho_arquivo):
-                continue
+        # Tenta carregar a legenda e pegar o valor da chave "capa"
+        legenda_path = os.path.join(caminho_tema, 'legendas.json')
+        if os.path.exists(legenda_path):
+            try:
+                with open(legenda_path, 'r', encoding='utf-8') as f:
+                    legendas = json.load(f)
+                    imagem_capa = legendas.get("capa")
+            except Exception as e:
+                print(f"[ERRO] Lendo legendas.json em {nome_tema}: {e}")
 
-            # Aceita .jpg e .jpeg
-            if nome_arquivo.lower().endswith('_700x600.jpg') or nome_arquivo.lower().endswith('_700x600.jpeg'):
-                imagem_redimensionada = os.path.join(
-                    'static', 'images', 'fotos', nome_tema, nome_arquivo
-                ).replace('\\', '/')
-                break
+        # Fallback: se não encontrou capa, usa a primeira imagem válida redimensionada
+        if not imagem_capa:
+            for nome_arquivo in os.listdir(caminho_tema):
+                if nome_arquivo.lower().endswith('_700x600.jpg') or nome_arquivo.lower().endswith('_700x600.jpeg'):
+                    imagem_capa = os.path.join(
+                        'static', 'images', 'fotos', nome_tema, nome_arquivo
+                    ).replace('\\', '/')
+                    break
 
-        if imagem_redimensionada:
+        if imagem_capa:
             dados_temas.append({
                 'nome': nome_tema.strip().title(),
-                'caminho': imagem_redimensionada,
+                'caminho': imagem_capa,
                 'rota': f'/tema/{nome_tema.lower().replace(" ", "-")}/'
             })
 
     # trata as avaliacoes
-    avaliacoes = coletar_avaliacoes(os.path.join(
-        'leads', 'templates', 'leads', 'scraper_avaliacoes.html'), 'avaliacao_google.json')
+    avaliacoes = coletar_avaliacoes(
+        os.path.join('leads', 'templates', 'leads', 'scraper_avaliacoes.html'),
+        'avaliacao_google.json'
+    )
 
     context = {'temas': dados_temas, 'avaliacoes': avaliacoes}
 
     return render(request, 'home.html', context)
+
 
 
 def exibir_tema(request, nome_tema_slug):
@@ -117,7 +127,7 @@ def exibir_tema(request, nome_tema_slug):
                 caminho_relativo = os.path.join('static', 'images', 'fotos',
                                                 nome_tema.upper(),
                                                 nome_arquivo).replace('\\', '/')
-                
+
                 # imagens_tema.append(
                 #   {'caminho': caminho_relativo, 'nome': nome_arquivo})
                 imagens_tema.append({'thumbnail': caminho_relativo,
@@ -125,11 +135,12 @@ def exibir_tema(request, nome_tema_slug):
                                      'nome': nome_arquivo})
 
     # carrega as avaliacoes
-    avaliacoes = json.load(open('avaliacao_google.json', 'r', encoding='utf-8'))
-
+    avaliacoes = json.load(
+        open('avaliacao_google.json', 'r', encoding='utf-8'))
 
     print(f"[INFO] Imagens do tema {nome_tema}: {imagens_tema}")
-    context = {'nome_tema': nome_tema, 'imagens': imagens_tema, 'avaliacoes': avaliacoes}
+    context = {'nome_tema': nome_tema,
+               'imagens': imagens_tema, 'avaliacoes': avaliacoes}
     return render(request, 'pagina_tema.html', context)
 
 
@@ -213,5 +224,5 @@ def coletar_avaliacoes(html_path, json_path):
 
     print(
         f"[INFO] {len(avaliacoes)} avaliações coletadas e salvas em {json_path}")
-    
+
     return avaliacoes

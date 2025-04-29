@@ -1,181 +1,92 @@
-/* Garante que html e body ocupem toda a altura da tela */
+/* admin_custom.css */
+
+/* Garante o fundo e altura mínima */
 html, body {
     height: 100%;
     min-height: 100vh;
     margin: 0;
+    padding: 0;
 }
 
-/* Ajuste para o admin do Django */
-body.login, body.admin {
-    position: relative;
-    min-height: 100vh;
-    background: url('./leads/img/capa-site-rejane-1.jpeg') no-repeat center center fixed;
+/* Mantém aparência limpa */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: url('/static/seuapp/img/background-admin.jpg') no-repeat center center fixed;
     background-size: cover;
 }
 
-/* Overlay para escurecer/transparentar o fundo */
-body.login::after, body.admin::after {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(255, 255, 255, 0.85);
-    z-index: -1;
-}
-
-/* Header */
+/* Corrige o header */
 #header {
     background-color: #6EC1E4 !important;
 }
 
-#header h1 a,
-#user-tools a {
+#header h1 a {
     color: white !important;
+    font-size: 2rem;
 }
 
-/* Estilo geral do título */
-.admin-title {
-    font-size: 2.5rem; /* Tamanho normal para desktop */
-    font-weight: bold;
+/* Ajuste dos blocos */
+#content, .module {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Botões principais */
+.admin-btn {
+    display: inline-block;
     text-align: center;
-    word-break: break-word; /* Quebra a linha se for necessário */
-    margin-bottom: 2rem;
-}
-
-/* Conteúdo principal */
-#container, #content {
-    min-height: calc(100vh - 120px);
-}
-
-.module, .dashboard #content {
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 5px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-}
-
-.login #container {
-    background-color: rgba(255, 255, 255, 0.9);
-}
-
-/* Links */
-a:link, a:visited {
-    color: #0366d6;
-}
-a:hover {
-    color: #d9534f;
-}
-
-/* Desativa modo escuro automático */
-:root {
-    color-scheme: light;
-}
-
-
-/* Ajuste do título principal */
-.admin-title {
-    font-size: 2rem; /* Tamanho padrão */
+    padding: 1rem 2rem;
+    min-width: 280px;
+    font-size: 1.25rem;
     font-weight: bold;
-    word-break: break-word;
+    border-radius: 50px;
+    color: white;
+    text-decoration: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: 0.3s ease;
+    margin: 0.5rem;
 }
 
-/* Tamanho maior dos botões e ícones no mobile */
-.admin-button {
-    font-size: 1rem; /* Tamanho padrão */
+/* Cores */
+.admin-btn.a {
+    background-color: #28a745; /* Verde */
+}
+.admin-btn.b {
+    background-color: #C67A7D; /* Rosa antigo */
+}
+.admin-btn.c {
+    background-color: #007bff; /* Azul */
 }
 
+/* Hover bonito */
+.admin-btn:hover {
+    filter: brightness(1.1);
+    transform: translateY(-3px);
+}
 
-/* ---------- RESPONSIVIDADE ---------- */
+/* Ajustes de responsividade */
 @media (max-width: 768px) {
-    /* Header ajustado no mobile */
-    #header {
-        text-align: center;
+    #header h1 a {
+        font-size: 1.5rem;
+    }
+
+    .button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    #content {
         padding: 10px;
     }
     
-    #header h1 a {
-        font-size: 20px;
+    .admin-btn {
+        width: 100%;
+        max-width: 280px;
     }
-
-    #user-tools {
-        text-align: center;
-        font-size: 14px;
-        margin-top: 5px;
-    }
-    .admin-title {
-        font-size: 1.6rem; /* Menor em tablets e celulares */
-    }
-
-    .admin-button {
-        font-size: 1.2rem; /* Texto maior no botão */
-    }
-
-    .admin-button i {
-        font-size: 1.5rem; /* Ícone ainda maior */
-    }
-
-    /* Containers menores */
-    #container, #content, .dashboard #content {
-        width: 95%;
-        margin: 20px auto;
-    }
-
-    /* Ajusta a área de login */
-    .login #container {
-        width: 90%;
-        padding: 20px;
-    }
-        .admin-title {
-        font-size: 1.8rem; /* Menor no tablet e mobile */
-    }
-
-    a.btn {
-        font-size: 1.5rem; /* Texto maior no botão */
-    }
-    #branding {
-        display: flex;
-        justify-content: center;
+    
+    .row {
+        flex-direction: column;
         align-items: center;
-        font-size: 30px;
-    }
-}
-
-@media (max-width: 480px) {
-    /* Fonte menor para telas muito pequenas */
-    #header h1 a {
-        font-size: 18px;
-    }
-
-    #user-tools {
-        font-size: 12px;
-    }
-
-    /* Botões do admin menores */
-    .button, .submit-row input, .addlink {
-        font-size: 14px !important;
-        padding: 8px 12px !important;
-    }
-
-    /* Formulários */
-    form input[type="text"],
-    form input[type="email"],
-    form input[type="password"],
-    form textarea,
-    form select {
-        font-size: 14px;
-        padding: 8px;
-    }
-        .admin-title {
-        font-size: 1.5rem; /* Ainda menor no celular muito pequeno */
-    }
-        a.btn {
-        font-size: 1rem; /* Texto maior no botão */
-    }
-        #branding {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 30px;
     }
 }
