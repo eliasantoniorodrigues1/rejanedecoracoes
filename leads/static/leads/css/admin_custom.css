@@ -1,7 +1,7 @@
 /* Garante que html e body ocupem toda a altura da tela */
 html, body {
     height: 100%;
-    min-height: 100vh; /* Viewport Height */
+    min-height: 100vh;
     margin: 0;
 }
 
@@ -13,10 +13,10 @@ body.login, body.admin {
     background-size: cover;
 }
 
-/* Overlay corrigido para cobrir sempre a tela toda */
+/* Overlay para escurecer/transparentar o fundo */
 body.login::after, body.admin::after {
     content: "";
-    position: fixed; /* Mantido como fixed para cobrir mesmo com scroll */
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
@@ -25,18 +25,46 @@ body.login::after, body.admin::after {
     z-index: -1;
 }
 
-/* Garante que o conteúdo principal ocupe pelo menos a altura total */
-#container, #content {
-    min-height: calc(100vh - 120px); /* Ajuste conforme seu header */
-}
-
-/* Mantenha o restante do seu CSS original abaixo */
+/* Header */
 #header {
     background-color: #6EC1E4 !important;
 }
 
-#header h1 a {
+#header h1 a,
+#user-tools a {
     color: white !important;
+}
+
+/* Estilo geral do título */
+.admin-title {
+    font-size: 2.5rem; /* Tamanho normal para desktop */
+    font-weight: bold;
+    text-align: center;
+    word-break: break-word; /* Quebra a linha se for necessário */
+    margin-bottom: 2rem;
+}
+
+/* Conteúdo principal */
+#container, #content {
+    min-height: calc(100vh - 120px);
+}
+
+.module, .dashboard #content {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.login #container {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Links */
+a:link, a:visited {
+    color: #0366d6;
+}
+a:hover {
+    color: #d9534f;
 }
 
 /* Desativa modo escuro automático */
@@ -44,58 +72,110 @@ body.login::after, body.admin::after {
     color-scheme: light;
 }
 
-/* Muda a cor da barra superior do admin */
-#header {
-    background-color: #6EC1E4 !important;
+
+/* Ajuste do título principal */
+.admin-title {
+    font-size: 2rem; /* Tamanho padrão */
+    font-weight: bold;
+    word-break: break-word;
 }
 
-#header h1 a {
-    color: white !important;
+/* Tamanho maior dos botões e ícones no mobile */
+.admin-button {
+    font-size: 1rem; /* Tamanho padrão */
 }
 
-#user-tools a {
-    color: white !important;
+
+/* ---------- RESPONSIVIDADE ---------- */
+@media (max-width: 768px) {
+    /* Header ajustado no mobile */
+    #header {
+        text-align: center;
+        padding: 10px;
+    }
+    
+    #header h1 a {
+        font-size: 20px;
+    }
+
+    #user-tools {
+        text-align: center;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+    .admin-title {
+        font-size: 1.6rem; /* Menor em tablets e celulares */
+    }
+
+    .admin-button {
+        font-size: 1.2rem; /* Texto maior no botão */
+    }
+
+    .admin-button i {
+        font-size: 1.5rem; /* Ícone ainda maior */
+    }
+
+    /* Containers menores */
+    #container, #content, .dashboard #content {
+        width: 95%;
+        margin: 20px auto;
+    }
+
+    /* Ajusta a área de login */
+    .login #container {
+        width: 90%;
+        padding: 20px;
+    }
+        .admin-title {
+        font-size: 1.8rem; /* Menor no tablet e mobile */
+    }
+
+    a.btn {
+        font-size: 1.5rem; /* Texto maior no botão */
+    }
+    #branding {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 30px;
+    }
 }
 
-/* custom.css */
-body.login, body.admin {
-    position: relative;
-    background: url('./leads/img/capa-site-rejane-1.jpeg') no-repeat center center fixed;
-    background-size: cover;
-}
+@media (max-width: 480px) {
+    /* Fonte menor para telas muito pequenas */
+    #header h1 a {
+        font-size: 18px;
+    }
 
-/* Camada overlay para escurecer/transparentar a imagem de fundo */
-body.login::after, body.admin::after {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(255, 255, 255, 0.85); /* Ajuste este valor para mais/menos transparência */
-    z-index: -1;
-}
+    #user-tools {
+        font-size: 12px;
+    }
 
-#header {
-    background-color: rgba(0, 0, 0, 0.9);
-}
+    /* Botões do admin menores */
+    .button, .submit-row input, .addlink {
+        font-size: 14px !important;
+        padding: 8px 12px !important;
+    }
 
-.module, .dashboard #content {
-    background-color: rgba(255, 255, 255, 0.8);
+    /* Formulários */
+    form input[type="text"],
+    form input[type="email"],
+    form input[type="password"],
+    form textarea,
+    form select {
+        font-size: 14px;
+        padding: 8px;
+    }
+        .admin-title {
+        font-size: 1.5rem; /* Ainda menor no celular muito pequeno */
+    }
+        a.btn {
+        font-size: 1rem; /* Texto maior no botão */
+    }
+        #branding {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 30px;
+    }
 }
-
-.login #container, .dashboard #content {
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.9);
-}
-
-a:link, a:visited {
-    color: #0366d6;
-}
-
-a:hover {
-    color: #d9534f;
-}
-
-/* Removi o blur anterior e substituí pelo overlay de transparência */

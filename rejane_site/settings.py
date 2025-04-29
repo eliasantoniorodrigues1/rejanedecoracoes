@@ -88,3 +88,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Email (console backend para teste)
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# google maps api key
+GOOGLE_MAPS_API_KEY = os.environ['GOOGLE_MAPS_API_KEY'] 

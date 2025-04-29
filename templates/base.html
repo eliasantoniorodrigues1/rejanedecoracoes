@@ -4,19 +4,16 @@
 {% include 'head.html' %}
 
 
-<body data-rsssl=1 class="home page-template-default page page-id-95 wp-custom-logo wp-embed-responsive theme-default elementor-default elementor-kit-451 elementor-page elementor-page-95">
+<body>
     {% include 'header.html' %}
-    <main id="content" class="site-main post-95 page type-page status-publish hentry">
-        <div class="page-content">
-            <div data-elementor-type="wp-page" data-elementor-id="95" class="elementor elementor-95" data-elementor-post-type="page">
-                
-                <!-- apresentacao inicial com foto de fundo -->
-                {% include 'jumbotron.html' %}
-                <!-- inicio dos temas -->	
-                {% include 'tema_decoracoes.html' %}
-
-            </div>
+    <main id="content" class="site-main">
+        <div class="container">
+            <!-- apresentacao inicial com foto de fundo -->
+            {% include 'jumbotron.html' %}
+            <!-- inicio dos temas -->	
+            {% include 'tema_decoracoes.html' %}
         </div>
+        
          <!-- avaliacoes google e mapa -->            
         {% include 'secoes.html' %}
 

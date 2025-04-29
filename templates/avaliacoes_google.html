@@ -1,0 +1,51 @@
+{% load static %}
+{% block content %}
+<div class="container my-5">
+    <h2 class="text-center mb-4">O que nossos clientes dizem</h2>
+    {% if avaliacoes %}
+    <div id="carouselAvaliacoes" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+
+            {% for review in avaliacoes %}
+              <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <div class="card shadow-sm p-4">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ review.nome }}</h5>
+                        <p class="text-warning mb-2">
+                            {% for i in "12345"|slice:":review.rating"|make_list %}
+                                ⭐
+                            {% endfor %}
+                        </p>
+                        <p class="card-text">{{ review.text|truncatewords:30 }}</p>
+                        <small class="text-muted">{{ review.comentario }}</small>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+
+        <!-- Controles do carrossel -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselAvaliacoes" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselAvaliacoes" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Próximo</span>
+        </button>
+    </div>
+    {% else %}
+        <p class="text-center">Nenhuma avaliação encontrada no momento.</p>
+    {% endif %}
+</div>
+
+<!-- Inicializa o carrossel para passar automaticamente -->
+<script>
+    var myCarousel = document.querySelector('#carouselAvaliacoes');
+    var carousel = new bootstrap.Carousel(myCarousel, {
+        interval: 4000,  // muda de avaliação a cada 4 segundos
+        ride: 'carousel'
+    });
+</script>
+{% endblock %}

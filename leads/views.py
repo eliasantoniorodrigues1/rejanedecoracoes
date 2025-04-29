@@ -7,9 +7,12 @@ from .models import Lead, ZipDeFotos  # Importando os modelos que você tem
 from django.core.paginator import Paginator
 from django.templatetags.static import static
 from django.http import JsonResponse
+import json
+from bs4 import BeautifulSoup
 
 
 FOTOS_DIR = os.path.join(settings.BASE_DIR, 'static/images', 'fotos')
+TEMPLATE_DIR = os.path.join(settings.BASE_DIR, 'templates')
 
 # utils
 
@@ -87,7 +90,12 @@ def home(request):
                 'rota': f'/tema/{nome_tema.lower().replace(" ", "-")}/'
             })
 
-    context = {'temas': dados_temas}
+    # trata as avaliacoes
+    avaliacoes = coletar_avaliacoes(os.path.join(
+        'leads', 'templates', 'leads', 'scraper_avaliacoes.html'), 'avaliacao_google.json')
+
+    context = {'temas': dados_temas, 'avaliacoes': avaliacoes}
+
     return render(request, 'home.html', context)
 
 
@@ -109,14 +117,19 @@ def exibir_tema(request, nome_tema_slug):
                 caminho_relativo = os.path.join('static', 'images', 'fotos',
                                                 nome_tema.upper(),
                                                 nome_arquivo).replace('\\', '/')
+                
                 # imagens_tema.append(
                 #   {'caminho': caminho_relativo, 'nome': nome_arquivo})
                 imagens_tema.append({'thumbnail': caminho_relativo,
                                      'original': caminho_relativo,
                                      'nome': nome_arquivo})
-                
+
+    # carrega as avaliacoes
+    avaliacoes = json.load(open('avaliacao_google.json', 'r', encoding='utf-8'))
+
+
     print(f"[INFO] Imagens do tema {nome_tema}: {imagens_tema}")
-    context = {'nome_tema': nome_tema, 'imagens': imagens_tema}
+    context = {'nome_tema': nome_tema, 'imagens': imagens_tema, 'avaliacoes': avaliacoes}
     return render(request, 'pagina_tema.html', context)
 
 
@@ -169,3 +182,36 @@ def elementor_ajax(request):
     # Implemente a lógica de AJAX conforme necessário
     return JsonResponse({'status': 'success'})
 
+
+def coletar_avaliacoes(html_path, json_path):
+    with open(html_path, 'r', encoding='utf-8') as file:
+        soup = BeautifulSoup(file, 'html.parser')
+
+    # Extraindo uma vez apenas
+    nomes = [nome.get_text(strip=True)
+             for nome in soup.find_all('div', class_='Vpc5Fe')]
+    notas = [nota.get('aria-label')
+             for nota in soup.find_all('div', class_='dHX2k')]
+    comentarios = [comentario.get_text(
+        strip=True) for comentario in soup.find_all('div', class_='OA1nbd')]
+
+    # Garante que o número de elementos seja o mesmo
+    total = min(len(nomes), len(notas), len(comentarios))
+
+    avaliacoes = []
+
+    for i in range(total):
+        avaliacoes.append({
+            'nome': nomes[i],
+            'nota': notas[i],
+            'comentario': comentarios[i]
+        })
+
+    # Salvando em JSON
+    with open(json_path, 'w', encoding='utf-8') as f:
+        json.dump(avaliacoes, f, ensure_ascii=False, indent=2)
+
+    print(
+        f"[INFO] {len(avaliacoes)} avaliações coletadas e salvas em {json_path}")
+    
+    return avaliacoes

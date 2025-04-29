@@ -9,7 +9,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # Página inicial
     path('', views.home, name='home'),
-    path('home/', views.home, name='home'),
+    # path('home/', views.home, name='home'),
     path('tema/<str:nome_tema_slug>/', views.exibir_tema, name='exibir_tema'),
 
     # Páginas de conteúdo
@@ -27,4 +27,5 @@ urlpatterns = [
 
     # requisicoes ajax
     path('elementor-ajax/', views.elementor_ajax, name='elementor_ajax'),
+    # path('avaliacoes/', views.avaliacoes_google, name='avaliacoes_google'),
 ]

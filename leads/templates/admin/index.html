@@ -1,50 +1,29 @@
 {% extends "admin/base_site.html" %}
+
 {% block content %}
-<h1>Bem-vindo ao Painel Administrativo - Rejane Decorações</h1>
+<div class="container text-center my-5">
+    <h1 class="mb-4">Bem-vindo ao Painel Administrativo - Rejane Decorações</h1>
 
-<a href="{% url 'admin:leads_zipdefotos_add' %}"
-   class="button"
-   style="
-       display: inline-block;
-       width: 200px;
-       text-align: center;
-       background:#4CAF50;
-       color:white;
-       padding:20px 20px;
-       border-radius:5px;
-       text-decoration:none;">
-    📦 Enviar fotos (.zip)
-</a>
+    <div class="row justify-content-center g-3">
+        <div class="col-12 col-sm-6 col-md-4">
+            <a href="{% url 'admin:leads_zipdefotos_add' %}" class="btn btn-success w-100 py-3">
+                📦 Enviar fotos (.zip)
+            </a>
+        </div>
 
-<a href="{% url 'admin:galeria' %}"
-   class="button"
-   style="
-       display: inline-block;
-       width: 200px;
-       text-align: center;
-       background:#C67A7D;
-       color:white;
-       padding:20px 20px;
-       border-radius:5px;
-       text-decoration:none;">
-    📁 Acessar Galeria de Fotos
-</a>
+        <div class="col-12 col-sm-6 col-md-4">
+            <a href="{% url 'admin:galeria' %}" class="btn btn-danger w-100 py-3" style="background-color: #C67A7D; border-color: #C67A7D;">
+                📁 Acessar Galeria de Fotos
+            </a>
+        </div>
 
-    <a href="/"
-       class="button"
-       style="
-           display: inline-block;
-           width: 200px;
-           text-align: center;
-           background:#2196F3;
-           color:white;
-           padding:20px 20px;
-           border-radius:5px;
-           text-decoration:none;">
-        🏠 Voltar para Site
-    </a>
+        <div class="col-12 col-sm-6 col-md-4">
+            <a href="/" class="btn btn-primary w-100 py-3">
+                🏠 Voltar para Site
+            </a>
+        </div>
+    </div>
 </div>
-
 
 {{ block.super }}
 {% endblock %}
