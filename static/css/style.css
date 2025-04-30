@@ -27,27 +27,47 @@ div#redes-sociais {
     padding: 15px 0;
 }
 
-nav.navbar {
+ .navbar {
     background-color: #daf3f2;
     border: 3px solid rgba(0,0,0,0.1);
     box-shadow: 0 4px 4px rgba(0,0,0,0.1), 0 4px 8px rgba(0,0,0,0.1);
     max-height: 150px;
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+
+    position: relative; /* Adicione isso */
+    z-index: 1030; /* Bootstrap usa 1030 por padrão para navbars */
 }
 
-/* Garante que o container navbar não force tamanhos indesejados */
 .navbar > .container {
-  max-width: 100%;
-  padding-left: 15px;
-  padding-right: 15px;
+    width: 100%;
+    max-width: 1200px; /* Ajuste conforme necessário */
+    display: flex;
+    justify-content: space-between; /* Espaço entre logo e menu */
+    align-items: center; /* Alinha verticalmente */
+    padding: 0 20px;
 }
 
+.navbar-brand {
+    margin-right: auto; /* Empurra o menu para a direita */
+}
+
+.navbar-collapse {
+    margin-left: auto; /* Empurra a logo para a esquerda */
+}
+
+.navbar-nav {
+    display: flex;
+    gap: 15px; /* Espaço entre os itens do menu */
+}
 
 a.nav-link {
-    color: #464545;
+    color: #7A7A7A;
     font-size: 1.2rem;
     font-weight: 500;
     padding: 10px 20px;
     transition: all 0.3s ease;
+    white-space: nowrap; /* Evita quebra de linha */
 }
 
     /* Estilo para a logo */
@@ -105,6 +125,11 @@ a.nav-link {
 }
 
 /* ===== JUMBOTRON ===== */
+.jumbotron {
+    position: relative;
+    z-index: 1020; /* Valor menor que o da navbar */
+}
+
 .jumbotron-custom {
     min-height: 600px;
     display: flex;
@@ -281,8 +306,25 @@ a.btn.btn-success:hover {
         overflow: hidden;
     }
 
+    .navbar-collapse {
+        position: static; /* Volta ao normal em desktop */
+        width: auto;
+    }
+
     .logo-responsive {
         max-width: 150px; /* Um pouco menor para telas muito pequenas */
+    }
+
+    .navbar-collapse {
+        background-color: #daf3f2; /* Mesmo fundo da navbar */
+        padding: 15px;
+        margin-top: 10px;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .navbar-nav {
+        gap: 10px;
     }
 
     .section {

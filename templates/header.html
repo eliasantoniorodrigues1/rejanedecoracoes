@@ -131,12 +131,21 @@
 
 <!-- Script para fechar o menu hamburguer ao clicar em link -->
 <script>
-  document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', function () {
-      const navbarCollapse = document.getElementById('navbarNavDropdown');
-      if (navbarCollapse.classList.contains('show')) {
-        new bootstrap.Collapse(navbarCollapse).toggle();
-      }
+    document.addEventListener('DOMContentLoaded', function() {
+      // Fecha o menu ao clicar em um link
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function() {
+          const navbarCollapse = document.getElementById('navbarNavDropdown');
+          const bsCollapse = new bootstrap.Collapse(navbarCollapse);
+          bsCollapse.hide();
+        });
+      });
+
+      // Inicializa o toggler
+      const navbarToggler = document.querySelector('.navbar-toggler');
+      navbarToggler.addEventListener('click', function() {
+        const navbarCollapse = document.getElementById('navbarNavDropdown');
+        navbarCollapse.classList.toggle('show');
+      });
     });
-  });
 </script>

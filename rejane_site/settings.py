@@ -6,10 +6,10 @@ from dotenv import load_dotenv
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = os.environ['SECRET_KEY'] 
+SECRET_KEY = os.environ['SECRET_KEY']
 DEBUG = True
-ALLOWED_HOSTS = ['*', ]
-
+ALLOWED_HOSTS = ['185.139.1.152', 'rejanedecoracoes.com.br',
+                 'www.rejanedecoracoes.com.br', 'localhost', '127.0.0.1']
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -90,4 +90,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # google maps api key
-GOOGLE_MAPS_API_KEY = os.environ['GOOGLE_MAPS_API_KEY'] 
+GOOGLE_MAPS_API_KEY = os.environ['GOOGLE_MAPS_API_KEY']
